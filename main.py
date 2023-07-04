@@ -1,33 +1,22 @@
-from typing import List
-
-from draw import draw
+from draw import draw, gen_matrix
 from settings import MAX_X, MAX_Y
 from models import Chars
 
 
-def gen_matrix(x_length: int, y_length: int, chars: Chars) -> List[List[str]]:
-    matrix = [[' ' for _ in range(x_length)] for _ in range(y_length)]
-    for ch in chars.chars:
-        matrix[ch.y][ch.x] = ch.val
-        while ch.next:
-            ch = ch.next            
-            matrix[ch.y][ch.x] = ch.val
-
-    return matrix
-
-
-def update(chars: Chars):
+def update(chars) -> None:
     chars.step()
 
-    return chars
 
-
-def start():
-    chars = Chars(5)
+def start() -> None:
+    chars = Chars(MAX_X)
+    flag = False
     while True:
-        chars = update(chars)
+        if flag:
+            update(chars)
+        else:
+            flag = True
         matrix = gen_matrix(MAX_X, MAX_Y, chars)
         draw(matrix)
 
-
-start()
+if __name__ == "__main__":
+    start()

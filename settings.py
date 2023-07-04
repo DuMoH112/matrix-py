@@ -1,1 +1,2 @@
-MAX_X, MAX_Y = 10, 10
+MAX_X, MAX_Y = 5, 10
+FPS = 60
