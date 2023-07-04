@@ -1,34 +1,8 @@
-from random import randrange
 from typing import List
 
 from draw import draw
-from utils import *
-
-
-X, Y = 10, 10
-
-
-class ColumnChar:
-    def __init__(self, x: int, y: int = 0, val: str = None):
-        self.x = x
-        self.y = y
-        self.val = val if val else gen_random_char()
-        self.next = None
-
-    def step(self):
-        self.next = ColumnChar(self.x, self.y + 1, gen_random_char())
-
-
-class Chars:
-    def __init__(self, count_char: int):
-        self.max_size = count_char
-        self.chars = [ColumnChar(randrange(0, X)) for _ in range(count_char)]
-
-        return
-
-    def step(self):
-        for ch in self.chars:
-            ch.step()
+from settings import MAX_X, MAX_Y
+from models import Chars
 
 
 def gen_matrix(x_length: int, y_length: int, chars: Chars) -> List[List[str]]:
@@ -52,7 +26,7 @@ def start():
     chars = Chars(5)
     while True:
         chars = update(chars)
-        matrix = gen_matrix(X, Y, chars)
+        matrix = gen_matrix(MAX_X, MAX_Y, chars)
         draw(matrix)
 
 
