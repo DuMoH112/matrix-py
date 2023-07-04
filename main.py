@@ -1,25 +1,12 @@
-import os
-from time import sleep
 from random import randrange
 from typing import List
 
+from draw import draw
+from utils import *
+
+
 X, Y = 10, 10
 
-
-class Del(Exception):
-    pass
-
-
-def gen_random_char() -> str:
-    return chr(randrange(33, 126))
-
-
-def generate_random_string(length: int) -> str:
-    return ' '.join([gen_random_char() for _ in range(length)])
-
-
-def clear_console():
-    os.system('cls' if os.name == 'nt' else 'clear')
 
 class ColumnChar:
     def __init__(self, x: int, y: int = 0, val: str = None):
@@ -30,16 +17,6 @@ class ColumnChar:
 
     def step(self):
         self.next = ColumnChar(self.x, self.y + 1, gen_random_char())
-
-
-def draw(matrix: List[List[str]]) -> None:
-    for row in matrix:
-        print(' '.join(row))
-
-    sleep(0.2)
-    clear_console()
-
-    return
 
 
 class Chars:
